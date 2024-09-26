@@ -1,0 +1,35 @@
+{
+  "questions": [
+    { "question": "What is the capital of France?", "topics": ["Geography"] },
+    { "question": "Which planet is known as the Red Planet?", "topics": ["Science", "Space"] },
+    { "question": "What is the largest mammal in the world?", "topics": ["Science", "Biology"] },
+    {
+      "question": "What is the boiling point of water at sea level?",
+      "topics": ["Science", "Physics"]
+    },
+    { "question": "Who wrote the play \"Romeo and Juliet\"?", "topics": ["Literature", "History"] },
+    { "question": "What is the smallest prime number?", "topics": ["Math"] },
+    {
+      "question": "Which element has the chemical symbol 'O'?",
+      "topics": ["Science", "Chemistry"]
+    },
+    {
+      "question": "What is the hardest natural substance on Earth?",
+      "topics": ["Science", "Geology"]
+    },
+    { "question": "Which continent is the Sahara Desert located on?", "topics": ["Geography"] },
+    { "question": "Who painted the Mona Lisa?", "topics": ["Art", "History"] }
+  ],
+  "choices": [
+    ["Berlin", "Madrid", "Paris", "Rome"],
+    ["Earth", "Mars", "Jupiter", "Saturn"],
+    ["Elephant", "Blue Whale", "Great White Shark", "Giraffe"],
+    ["90°C", "100°C", "80°C", "120°C"],
+    ["William Wordsworth", "William Shakespeare", "Charles Dickens", "George Orwell"],
+    ["0", "1", "2", "3"],
+    ["Gold", "Hydrogen", "Oxygen", "Zinc"],
+    ["Gold", "Iron", "Diamond", "Silver"],
+    ["Asia", "South America", "Africa", "Australia"],
+    ["Vincent van Gogh", "Leonardo da Vinci", "Pablo Picasso", "Claude Monet"]
+  ]
+}
