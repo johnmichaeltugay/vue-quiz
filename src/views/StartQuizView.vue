@@ -21,14 +21,18 @@ const topicsList = [topicsRoster.join(', '), lastItem].join(', and ')
                 <RouterLink to="/about">About</RouterLink>
             </nav>
         </div> -->
-    <p class="text-5xl text-center noto-sans-100 py-8">(Mini) Trivia Quiz</p>
-    <p id="general-instructions" class="text-center">
-      Answer the 10 questions by choosing from the provided choices. Question topics include:
-      {{ topicsList }}.
+
+    <p id="general-instructions" class="font-primary font-semibold text-center">
+      Answer the {{ questionsList.length }} question{{ questionsList.length > 1 ? 's' : '' }} by
+      choosing from the provided choices. Question topics include: {{ topicsList }}.
     </p>
   </header>
-  <nav class="bg-slate-600 hover:bg-amber-600 text-center w-1/3 mt-20">
-    <RouterLink to="/quiz" class="noto-sans-800 text-xl w-full">Start</RouterLink>
+  <nav
+    class="bg-slate-600 hover:bg-amber-600 flex flex-col rounded transition-all ease-in-out duration-150 text-center md:w-1/3 w-1/2 py-2 mt-20"
+  >
+    <RouterLink to="/quiz" class="font-primary font-extrabold text-xl items-stretch"
+      >Start</RouterLink
+    >
   </nav>
 </template>
 

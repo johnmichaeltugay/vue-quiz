@@ -2,8 +2,14 @@
 export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: 'black'
+      },
+      fontFamily: {
+        primary: "'Noto Sans', sans-serif"
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 }
-
