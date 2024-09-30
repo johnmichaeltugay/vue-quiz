@@ -24,19 +24,23 @@ const nextQuestion = () => {
   currentSelection.value = ''
 }
 const writeCacheData = (data, quizNumber) => {
-  localStorage.setItem(props.quizCache, JSON.stringify({ quizNumber: quizNumber, data: data }))
+  localStorage.setItem(props.quizCache, JSON.stringify({ n: quizNumber, d: data }))
 }
 const localStorageRecord = localStorage.getItem(props.quizCache)
 if (localStorageRecord !== null) {
   const cachedData = JSON.parse(localStorageRecord)
-  store.scoreTracker = cachedData.data
+  store.scoreTracker = cachedData.d
   currentQuestion.value =
-    store.scoreTracker[cachedData.quizNumber] === null
-      ? cachedData.quizNumber
-      : cachedData.quizNumber + 1 === cachedData.data.length
-        ? cachedData.quizNumber
-        : cachedData.quizNumber + 1
+    store.scoreTracker[cachedData.n] === null
+      ? cachedData.n
+      : cachedData.n + 1 === cachedData.d.length
+        ? cachedData.n
+        : cachedData.n + 1
 } else {
+  writeCacheData(store.scoreTracker, currentQuestion.value)
+}
+
+window.onbeforeunload = () => {
   writeCacheData(store.scoreTracker, currentQuestion.value)
 }
 </script>

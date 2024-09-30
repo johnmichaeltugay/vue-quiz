@@ -5,7 +5,7 @@ import answersData from '@/data/answersRoster.json'
 const questions = questionsData.questions
 const choices = questionsData.choices
 const answers = answersData.answers
-const localStorageID = 'quizTracker'
+const localStorageID = 'RuKIrzAQcTe'
 
 const countCheck =
   questions.length > choices.length
