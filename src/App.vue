@@ -1,20 +1,10 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useRouter, RouterLink, RouterView } from 'vue-router'
-
-const isQuizTime = computed(() => {
-  return useRouter().currentRoute._value.name === 'quiz'
-})
 </script>
 
 <template>
   <p class="text-5xl text-center font-primary font-thin py-8">Trivia Quiz</p>
-  <div class="bg-red-500 w-full" v-if="isQuizTime">conditional rendering based on url</div>
-  <div
-    class="flex flex-col justify-center items-center border-white border-2 rounded-md p-6 md:p-12"
-  >
-    <RouterView />
-  </div>
+  <RouterView />
 </template>
 
 <style scoped>

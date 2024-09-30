@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import questionsData from '../data/questionsRoster.json'
-import answersData from '../data/answersRoster.json'
+import questionsData from '@/data/questionsRoster.json'
+import answersData from '@/data/answersRoster.json'
 
 const questions = questionsData.questions
 const choices = questionsData.choices
@@ -22,14 +22,20 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('./../views/StartQuizView.vue'),
+      component: () => import('@/views/StartQuizView.vue'),
       props: { questionsList: questions }
     },
     {
       path: '/quiz',
       name: 'quiz',
-      component: () => import('./../views/MainQuizView.vue'),
+      component: () => import('@/views/MainQuizView.vue'),
       props: { questionsList: questions, choicesList: choices, answersList: answers }
+    },
+    {
+      path: '/results',
+      name: 'results',
+      component: () => import('@/views/ResultsView.vue'),
+      props: { questionsList: questions }
     }
   ]
 })
