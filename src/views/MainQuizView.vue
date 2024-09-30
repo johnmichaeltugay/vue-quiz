@@ -6,6 +6,7 @@ const props = defineProps<{
   questionsList: object
   choicesList: object
   answersList: object
+  quizCache: string
 }>()
 
 const store = useQuizStore()
@@ -16,10 +17,27 @@ store.initializeScoreTracker(props.questionsList.length)
 const checkAnswer = () => {
   store.scoreTracker[currentQuestion.value] =
     currentSelection.value === props.answersList[currentQuestion.value]
+  writeCacheData(store.scoreTracker, currentQuestion.value)
 }
 const nextQuestion = () => {
   currentQuestion.value += 1
   currentSelection.value = ''
+}
+const writeCacheData = (data, quizNumber) => {
+  localStorage.setItem(props.quizCache, JSON.stringify({ quizNumber: quizNumber, data: data }))
+}
+const localStorageRecord = localStorage.getItem(props.quizCache)
+if (localStorageRecord !== null) {
+  const cachedData = JSON.parse(localStorageRecord)
+  store.scoreTracker = cachedData.data
+  currentQuestion.value =
+    store.scoreTracker[cachedData.quizNumber] === null
+      ? cachedData.quizNumber
+      : cachedData.quizNumber + 1 === cachedData.data.length
+        ? cachedData.quizNumber
+        : cachedData.quizNumber + 1
+} else {
+  writeCacheData(store.scoreTracker, currentQuestion.value)
 }
 </script>
 

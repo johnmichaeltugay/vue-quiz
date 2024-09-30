@@ -5,6 +5,7 @@ import answersData from '@/data/answersRoster.json'
 const questions = questionsData.questions
 const choices = questionsData.choices
 const answers = answersData.answers
+const localStorageID = 'quizTracker'
 
 const countCheck =
   questions.length > choices.length
@@ -29,13 +30,18 @@ const router = createRouter({
       path: '/quiz',
       name: 'quiz',
       component: () => import('@/views/MainQuizView.vue'),
-      props: { questionsList: questions, choicesList: choices, answersList: answers }
+      props: {
+        questionsList: questions,
+        choicesList: choices,
+        answersList: answers,
+        quizCache: localStorageID
+      }
     },
     {
       path: '/results',
       name: 'results',
       component: () => import('@/views/ResultsView.vue'),
-      props: { questionsList: questions }
+      props: { questionsList: questions, quizCache: localStorageID }
     }
   ]
 })

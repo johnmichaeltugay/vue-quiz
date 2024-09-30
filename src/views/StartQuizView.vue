@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   questionsList: object
+  quizCache: string
 }>()
 const topicsRoster = props.questionsList.reduce((acc, item) => {
   for (const topic of item.topics) {
@@ -14,18 +15,10 @@ const topicsList = [topicsRoster.join(', '), lastItem].join(', and ')
 
 <template>
   <div
-    class="flex flex-col justify-center items-center border-white border-4 rounded-md p-6 md:p-12"
+    class="flex flex-col justify-center items-center border-stone-50 border-4 rounded-md p-6 md:p-12"
   >
     <header>
-      <!-- <div class="wrapper">
-            <HelloWorld msg="You did it!" />
-            <nav>
-                <RouterLink to="/">Home</RouterLink>
-                <RouterLink to="/about">About</RouterLink>
-            </nav>
-        </div> -->
-
-      <p id="general-instructions" class="font-primary font-semibold text-center">
+      <p id="general-instructions" class="font-primary font-semibold text-center text-stone-50">
         Answer the {{ questionsList.length }} question{{ questionsList.length > 1 ? 's' : '' }} by
         choosing from the provided choices. Question topics include: {{ topicsList }}.
       </p>
@@ -46,10 +39,5 @@ header {
   max-height: 100vh;
   display: flex;
   flex-direction: column;
-  /* background-color: #ff8800; */
-}
-
-p {
-  color: #dddddd;
 }
 </style>

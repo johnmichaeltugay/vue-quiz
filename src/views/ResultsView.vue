@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import { useQuizStore } from '@/stores/useQuizStore'
 
+const props = defineProps<{
+  questionsList: object
+  quizCache: string
+}>()
+
 const store = useQuizStore()
 const resetQuizData = () => {
   store.resetScoreTracker()
+  localStorage.removeItem(props.quizCache)
 }
 </script>
 <template>
