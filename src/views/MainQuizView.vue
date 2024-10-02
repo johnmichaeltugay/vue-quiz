@@ -1,3 +1,4 @@
+<!-- eslint-disable @typescript-eslint/no-unused-vars -->
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
 import { useQuizStore } from '@/stores/useQuizStore'
@@ -6,6 +7,10 @@ interface questionsRawData {
   question: string
   topics: string[]
   choices: string[]
+}
+
+interface ConditonalClassesReturn {
+  [key: string]: boolean
 }
 
 const props = defineProps<{
@@ -56,18 +61,33 @@ window.onbeforeunload = () => {
   }
 }
 
-// const choicesClasses = computed((selectedChoice) => ([
-//   'text-stone-50': store.scoreTracker[currentQuestion] !== null || props.choicesList[currentQuestion][selectedChoice] !== currentSelection.value,
-//   'bg-lime-600 border-lime-600': store.scoreTracker[currentQuestion] !== null && ( store.scoreTracker[currentQuestion] || props.choicesList[currentQuestion][selectedChoice] === props.answersList[currentQuestion]),
-//   'bg-rose-600 borrder-rose-600': store.scoreTracker[currentQuestion] !== null && props.choicesList[currentQuestion][selectedChoice] === currentSelection.value && !store.scoreTracker[currentQuestion],
-//   'bg-stone-700 border-transparent': props.choicesList[currentQuestion][selectedChoice] !== currentSelection.value && (props.choicesList[currentQuestion][selectedChoice] !== props.answersList[currentQuestion] || store.scoreTracker[currentQuestion] === null),
-//   'hover:bg-stone-500': store.scoreTracker[currentQuestion] === null && props.choicesList[currentQuestion][selectedChoice] !== currentSelection.value,
-//   'bg-amber-600 border-amber-100 text-stone-900': store.scoreTracker[currentQuestion] === null && props.choicesList[currentQuestion][selectedChoice] === currentSelection.value
-// ]))
+const choicesClasses = computed((selectedChoice) => {
+  return (selectedChoice: number) => {
+    const renderedChoice = props.questionsList[currentQuestion.value].choices[selectedChoice]
+    const pickedChoice = currentSelection.value
+    const correctChoice = props.answersList[currentQuestion.value]
+    const questionAssessment = store.scoreTracker[currentQuestion.value]
+
+    const isQuestionAnswered = questionAssessment !== null
+    const isChoiceSelected = renderedChoice === pickedChoice
+    const isChoiceTheCorrectAnswer = renderedChoice === correctChoice
+
+    return {
+      'text-stone-50': isQuestionAnswered || !isChoiceSelected,
+      'bg-lime-600 border-lime-600':
+        isQuestionAnswered && (questionAssessment || isChoiceTheCorrectAnswer),
+      'bg-rose-600 borrder-rose-600': isQuestionAnswered && isChoiceSelected && !questionAssessment,
+      'border-transparent': !isChoiceSelected && (!isChoiceTheCorrectAnswer || !isQuestionAnswered),
+      'bg-stone-800': isQuestionAnswered && !isChoiceSelected && !isChoiceTheCorrectAnswer,
+      'bg-stone-700 hover:bg-stone-500': !isQuestionAnswered && !isChoiceSelected,
+      'bg-amber-600 border-amber-100 text-stone-900': !isQuestionAnswered && isChoiceSelected
+    } as Record<string, boolean>
+  }
+})
 </script>
 
 <template>
-  <div class="select-none">
+  <div class="select-none w-full">
     <div
       class="flex flex-col justify-center items-center border-amber-200 border-4 rounded-3xl p-6 md:p-12 mb-16"
     >
@@ -88,20 +108,7 @@ window.onbeforeunload = () => {
         id="choices-box"
         class="rounded-sm border-2 w-full px-3 my-1 flex transition-all ease-in-out duration-150"
         v-for="(choice, index) in props.questionsList[currentQuestion].choices"
-        :class="
-          store.scoreTracker[currentQuestion] !== null
-            ? props.questionsList[currentQuestion].choices[index] === currentSelection
-              ? store.scoreTracker[currentQuestion]
-                ? 'bg-lime-600 border-lime-600 text-stone-50'
-                : 'bg-rose-600 border-rose-600 text-stone-50'
-              : props.questionsList[currentQuestion].choices[index] ===
-                  props.answersList[currentQuestion]
-                ? 'bg-lime-600 border-lime-600 text-stone-50'
-                : 'bg-stone-800 border-transparent text-stone-50'
-            : props.questionsList[currentQuestion].choices[index] === currentSelection
-              ? 'bg-amber-600 border-amber-100 text-stone-900'
-              : 'bg-stone-700 hover:bg-stone-500 border-transparent text-stone-50'
-        "
+        :class="choicesClasses(index)"
         :key="props.questionsList[currentQuestion].choices[index]"
       >
         <input
@@ -171,17 +178,14 @@ window.onbeforeunload = () => {
             <RouterLink
               to="/results"
               class="font-primary text-lg md:text-xl font-extrabold self-stretch py-3"
-              @click="writeCacheData(store.scoreTracker, -1)"
+              @click="writeCacheData(store.scoreTracker, currentQuestion)"
               >Finish Quiz</RouterLink
             >
           </nav>
         </Transition>
       </div>
     </div>
-    <div
-      id="scoreTrackerNav"
-      class="py-4 flex flex-nowrap w-[70vw] min-w-min max-w-screen-md overflow-scroll"
-    >
+    <div id="scoreTrackerNav" class="py-4 flex flex-nowrap w-full max-w-screen-md overflow-scroll">
       <div
         class="rounded-full text-stone-50 flex justify-center items-center md:min-w-12 min-w-10 md:min-h-12 min-h-10 mx-1"
         v-for="(tracker, index) in store.scoreTracker"
