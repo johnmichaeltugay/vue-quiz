@@ -24,7 +24,8 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: () => import('@/views/StartQuizView.vue'),
-      props: { questionsList: questions }
+      props: { questionsList: questions, quizCache: localStorageID },
+      meta: { transition: 'slide-right' }
     },
     {
       path: '/quiz',
@@ -35,13 +36,15 @@ const router = createRouter({
         choicesList: choices,
         answersList: answers,
         quizCache: localStorageID
-      }
+      },
+      meta: { transition: 'slide-right' }
     },
     {
       path: '/results',
       name: 'results',
       component: () => import('@/views/ResultsView.vue'),
-      props: { questionsList: questions, quizCache: localStorageID }
+      props: { questionsList: questions, quizCache: localStorageID },
+      meta: { transition: 'slide-right' }
     }
   ]
 })
