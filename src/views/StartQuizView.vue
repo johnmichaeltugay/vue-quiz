@@ -24,10 +24,13 @@ const router = useRouter()
 const localStorageData = localStorage.getItem(props.quizCache)
 if (localStorageData !== null) {
   const data = JSON.parse(localStorageData)
-  const quizProgress = data.d.reduce((acc: number, currentValue: boolean | null) => {
-    if (currentValue !== null) acc += 1
-    return acc
-  }, 0)
+  const quizProgress = data.quizProgress.reduce(
+    (accumulator: number, currentValue: boolean | null) => {
+      if (currentValue !== null) accumulator += 1
+      return accumulator
+    },
+    0
+  )
   if (quizProgress === props.questionsList.length) router.push('/results')
   else if (quizProgress < props.questionsList.length) router.push('/quiz')
 }

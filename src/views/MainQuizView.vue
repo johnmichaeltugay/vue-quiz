@@ -9,7 +9,6 @@ interface questionsRawData {
 
 const props = defineProps<{
   questionsList: questionsRawData[]
-  choicesList: string[][]
   answersList: string[]
   quizCache: string
 }>()
@@ -20,7 +19,10 @@ const currentSelection = ref('')
 
 store.initializeScoreTracker(props.questionsList.length)
 const writeCacheData = (data: (boolean | null)[], quizNumber: number) => {
-  localStorage.setItem(props.quizCache, JSON.stringify({ n: quizNumber, d: data }))
+  localStorage.setItem(
+    props.quizCache,
+    JSON.stringify({ itemProgress: quizNumber, quizProgress: data })
+  )
 }
 
 const checkAnswer = () => {
@@ -36,13 +38,13 @@ const nextQuestion = () => {
 const localStorageRecord = localStorage.getItem(props.quizCache)
 if (localStorageRecord !== null) {
   const cachedData = JSON.parse(localStorageRecord)
-  store.scoreTracker = cachedData.d
+  store.scoreTracker = cachedData.quizProgress
   currentQuestion.value =
-    store.scoreTracker[cachedData.n] === null
-      ? cachedData.n
-      : cachedData.n + 1 === cachedData.d.length
-        ? cachedData.n
-        : cachedData.n + 1
+    store.scoreTracker[cachedData.itemProgress] === null
+      ? cachedData.itemProgress
+      : cachedData.itemProgress + 1 === cachedData.quizProgress.length
+        ? cachedData.itemProgress
+        : cachedData.itemProgress + 1
 } else {
   writeCacheData(store.scoreTracker, currentQuestion.value)
 }
@@ -84,44 +86,45 @@ window.onbeforeunload = () => {
       <div
         id="choices-box"
         class="rounded-sm border-2 w-full px-3 my-1 flex transition-all ease-in-out duration-150"
-        v-for="(choice, index) in props.choicesList[currentQuestion]"
+        v-for="(choice, index) in props.questionsList[currentQuestion].choices"
         :class="
           store.scoreTracker[currentQuestion] !== null
-            ? props.choicesList[currentQuestion][index] === currentSelection
+            ? props.questionsList[currentQuestion].choices[index] === currentSelection
               ? store.scoreTracker[currentQuestion]
                 ? 'bg-lime-600 border-lime-600 text-stone-50'
                 : 'bg-rose-600 border-rose-600 text-stone-50'
-              : props.choicesList[currentQuestion][index] === props.answersList[currentQuestion]
+              : props.questionsList[currentQuestion].choices[index] ===
+                  props.answersList[currentQuestion]
                 ? 'bg-lime-600 border-lime-600 text-stone-50'
                 : 'bg-stone-800 border-transparent text-stone-50'
-            : props.choicesList[currentQuestion][index] === currentSelection
+            : props.questionsList[currentQuestion].choices[index] === currentSelection
               ? 'bg-amber-600 border-amber-100 text-stone-900'
               : 'bg-stone-700 hover:bg-stone-500 border-transparent text-stone-50'
         "
-        :key="props.choicesList[currentQuestion][index]"
+        :key="props.questionsList[currentQuestion].choices[index]"
       >
         <input
           type="radio"
           class="hidden"
           v-model="currentSelection"
           :name="'question' + currentQuestion"
-          :id="props.choicesList[currentQuestion][index]"
-          :value="props.choicesList[currentQuestion][index]"
+          :id="props.questionsList[currentQuestion].choices[index]"
+          :value="props.questionsList[currentQuestion].choices[index]"
           :disabled="store.scoreTracker[currentQuestion] !== null"
         />
         <label
-          :for="props.choicesList[currentQuestion][index]"
+          :for="props.questionsList[currentQuestion].choices[index]"
           class="font-primary text-lg md:text-xl flex w-full py-2 self-stretch"
           :class="[
             store.scoreTracker[currentQuestion] !== null &&
-            (props.choicesList[currentQuestion][index] === currentSelection ||
-              props.choicesList[currentQuestion][index] === props.answersList[currentQuestion])
+            props.questionsList[currentQuestion].choices[index] ===
+              props.answersList[currentQuestion]
               ? 'font-bold'
               : 'font-light',
             store.scoreTracker[currentQuestion] === null ? 'hover:cursor-pointer' : ''
           ]"
           :disabled="store.scoreTracker[currentQuestion] !== null"
-          >{{ props.choicesList[currentQuestion][index] }}</label
+          >{{ props.questionsList[currentQuestion].choices[index] }}</label
         >
       </div>
       <div class="flex w-full mt-12 py-6 justify-center items-center relative">
@@ -183,7 +186,9 @@ window.onbeforeunload = () => {
         v-for="(tracker, index) in store.scoreTracker"
         :class="[
           store.scoreTracker[index] === null
-            ? 'bg-stone-600'
+            ? currentQuestion === index
+              ? 'bg-amber-600'
+              : 'bg-stone-600'
             : store.scoreTracker[index]
               ? 'bg-lime-600'
               : 'bg-rose-600',

@@ -22,8 +22,8 @@ const router = useRouter()
 const localStorageData = localStorage.getItem(props.quizCache)
 if (localStorageData !== null) {
   const data = JSON.parse(localStorageData)
-  store.scoreTracker = data.d
-  const quizProgress = data.d.reduce((acc: number, currentValue: boolean | null) => {
+  store.scoreTracker = data.quizProgress
+  const quizProgress = data.quizProgress.reduce((acc: number, currentValue: boolean | null) => {
     if (currentValue !== null) acc += 1
     return acc
   }, 0)

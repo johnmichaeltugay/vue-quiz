@@ -1,35 +1,54 @@
 {
   "questions": [
-    { "question": "What is the capital of France?", "topics": ["Geography"] },
-    { "question": "Which planet is known as the Red Planet?", "topics": ["Science", "Space"] },
-    { "question": "What is the largest mammal in the world?", "topics": ["Science", "Biology"] },
+    {
+      "question": "What is the capital of France?",
+      "topics": ["Geography"],
+      "choices": ["Berlin", "Madrid", "Paris", "Rome"]
+    },
+    {
+      "question": "Which planet is known as the Red Planet?",
+      "topics": ["Science", "Space"],
+      "choices": ["Earth", "Mars", "Jupiter", "Saturn"]
+    },
+    {
+      "question": "What is the largest mammal in the world?",
+      "topics": ["Science", "Biology"],
+      "choices": ["Elephant", "Blue Whale", "Great White Shark", "Giraffe"]
+    },
     {
       "question": "What is the boiling point of water at sea level?",
-      "topics": ["Science", "Physics"]
+      "topics": ["Science", "Physics"],
+      "choices": ["90°C", "100°C", "80°C", "120°C"]
     },
-    { "question": "Who wrote the play \"Romeo and Juliet\"?", "topics": ["Literature", "History"] },
-    { "question": "What is the smallest prime number?", "topics": ["Math"] },
+    {
+      "question": "Who wrote the play \"Romeo and Juliet\"?",
+      "topics": ["Literature", "History"],
+      "choices": ["William Wordsworth", "William Shakespeare", "Charles Dickens", "George Orwell"]
+    },
+    {
+      "question": "What is the smallest prime number?",
+      "topics": ["Math"],
+      "choices": ["0", "1", "2", "3"]
+    },
     {
       "question": "Which element has the chemical symbol 'O'?",
-      "topics": ["Science", "Chemistry"]
+      "topics": ["Science", "Chemistry"],
+      "choices": ["Gold", "Hydrogen", "Oxygen", "Zinc"]
     },
     {
       "question": "What is the hardest natural substance on Earth?",
-      "topics": ["Science", "Geology"]
+      "topics": ["Science", "Geology"],
+      "choices": ["Gold", "Iron", "Diamond", "Silver"]
     },
-    { "question": "Which continent is the Sahara Desert located on?", "topics": ["Geography"] },
-    { "question": "Who painted the Mona Lisa?", "topics": ["Art", "History"] }
-  ],
-  "choices": [
-    ["Berlin", "Madrid", "Paris", "Rome"],
-    ["Earth", "Mars", "Jupiter", "Saturn"],
-    ["Elephant", "Blue Whale", "Great White Shark", "Giraffe"],
-    ["90°C", "100°C", "80°C", "120°C"],
-    ["William Wordsworth", "William Shakespeare", "Charles Dickens", "George Orwell"],
-    ["0", "1", "2", "3"],
-    ["Gold", "Hydrogen", "Oxygen", "Zinc"],
-    ["Gold", "Iron", "Diamond", "Silver"],
-    ["Asia", "South America", "Africa", "Australia"],
-    ["Vincent van Gogh", "Leonardo da Vinci", "Pablo Picasso", "Claude Monet"]
+    {
+      "question": "Which continent is the Sahara Desert located on?",
+      "topics": ["Geography"],
+      "choices": ["Asia", "South America", "Africa", "Australia"]
+    },
+    {
+      "question": "Who painted the Mona Lisa?",
+      "topics": ["Art", "History"],
+      "choices": ["Vincent van Gogh", "Leonardo da Vinci", "Pablo Picasso", "Claude Monet"]
+    }
   ]
 }
