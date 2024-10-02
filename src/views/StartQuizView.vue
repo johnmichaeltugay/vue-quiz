@@ -38,7 +38,10 @@ if (localStorageData !== null) {
     class="flex flex-col justify-center items-center border-stone-50 border-4 rounded-md p-6 md:p-12"
   >
     <header>
-      <p id="general-instructions" class="font-primary font-semibold text-center text-stone-50">
+      <p
+        id="general-instructions"
+        class="font-primary font-semibold text-center text-md md:text-lg text-stone-50"
+      >
         Answer the {{ questionsList.length }} question{{ questionsList.length > 1 ? 's' : '' }} by
         choosing from the provided choices. Question topics include: {{ topicsList }}.
       </p>
@@ -46,7 +49,9 @@ if (localStorageData !== null) {
     <nav
       class="bg-stone-600 hover:bg-amber-500 hover:text-black flex flex-col rounded transition-all ease-in-out duration-150 text-center md:w-1/3 w-1/2 mt-20"
     >
-      <RouterLink to="/quiz" class="font-primary font-extrabold text-xl items-stretch py-3"
+      <RouterLink
+        to="/quiz"
+        class="font-primary font-extrabold text-lg md:text-xl items-stretch py-3"
         >Start</RouterLink
       >
     </nav>

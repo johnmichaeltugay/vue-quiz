@@ -70,12 +70,12 @@ window.onbeforeunload = () => {
     >
       <div id="question-box" class="flex items-start w-full mb-4">
         <div
-          class="bg-amber-600 text-stone-50 font-primary font-medium text-2xl md:min-w-18 min-w-12 md:min-h-18 min-h-12 rounded-full flex justify-center items-center"
+          class="bg-amber-600 text-stone-50 font-primary font-medium text-2xl md:text-3xl md:min-w-18 min-w-12 md:min-h-18 min-h-12 rounded-full flex justify-center items-center"
         >
           {{ currentQuestion + 1 }}
         </div>
         <div class="flex flex-wrap items-center self-stretch">
-          <div class="font-primary font-extrabold text-stone-50 text-xl ml-4 flex">
+          <div class="font-primary font-extrabold text-stone-50 text-xl md:text-2xl ml-4 flex">
             {{ props.questionsList[currentQuestion].question }}
           </div>
         </div>
@@ -111,7 +111,7 @@ window.onbeforeunload = () => {
         />
         <label
           :for="props.choicesList[currentQuestion][index]"
-          class="font-primary flex w-full py-2 self-stretch"
+          class="font-primary text-lg md:text-xl flex w-full py-2 self-stretch"
           :class="[
             store.scoreTracker[currentQuestion] !== null &&
             (props.choicesList[currentQuestion][index] === currentSelection ||
@@ -129,7 +129,7 @@ window.onbeforeunload = () => {
           <button
             type="submit"
             v-if="store.scoreTracker[currentQuestion] === null"
-            class="absolute font-primary font-bold rounded-sm md:w-1/3 w-1/2 py-3 transition-all ease-in-out duration-150"
+            class="absolute font-primary text-lg md:text-xl font-bold rounded-sm md:w-1/3 w-1/2 py-3 transition-all ease-in-out duration-150"
             :class="
               store.scoreTracker[currentQuestion] !== null
                 ? 'hidden'
@@ -147,7 +147,7 @@ window.onbeforeunload = () => {
               store.getAnswered() !== props.questionsList.length &&
               store.scoreTracker[currentQuestion] !== null
             "
-            class="absolute font-primary font-bold rounded-sm md:w-1/3 w-1/2 py-3 transition-all ease-in-out duration-150"
+            class="absolute font-primary text-lg md:text-xl font-bold rounded-sm md:w-1/3 w-1/2 py-3 transition-all ease-in-out duration-150"
             :class="
               store.getAnswered() === props.questionsList.length ||
               store.scoreTracker[currentQuestion] === null
@@ -166,7 +166,7 @@ window.onbeforeunload = () => {
           >
             <RouterLink
               to="/results"
-              class="font-primary font-extrabold self-stretch py-3"
+              class="font-primary text-lg md:text-xl font-extrabold self-stretch py-3"
               @click="writeCacheData(store.scoreTracker, -1)"
               >Finish Quiz</RouterLink
             >
@@ -179,7 +179,7 @@ window.onbeforeunload = () => {
       class="py-4 flex flex-nowrap w-[70vw] min-w-min max-w-screen-md overflow-scroll"
     >
       <div
-        class="rounded-full text-stone-50 flex justify-center items-center md:min-w-8 min-w-6 md:min-h-8 min-h-6 mx-1"
+        class="rounded-full text-stone-50 flex justify-center items-center md:min-w-12 min-w-10 md:min-h-12 min-h-10 mx-1"
         v-for="(tracker, index) in store.scoreTracker"
         :class="[
           store.scoreTracker[index] === null
@@ -191,7 +191,7 @@ window.onbeforeunload = () => {
         ]"
         :key="index"
       >
-        <p class="font-primary font-bold text-base">{{ index + 1 }}</p>
+        <p class="font-primary font-bold text-base md:text-lg">{{ index + 1 }}</p>
       </div>
     </div>
   </div>

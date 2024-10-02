@@ -34,9 +34,9 @@ if (localStorageData !== null) {
   <div
     class="select-none text-stone-50 text-center font-primary w-full flex flex-col justify-center align-center"
   >
-    <h3 class="text-2xl font-extrabold">Your Score</h3>
-    <p class="text-8xl font-thin mt-4 mb-2">{{ store.getScore() }}</p>
-    <p class="text-md font-medium">
+    <h3 class="text-lg md:text-2xl font-extrabold">Your Score</h3>
+    <p class="text-6xl md:text-8xl font-thin mt-4 mb-2">{{ store.getScore() }}</p>
+    <p class="text-sm md:text-md font-medium">
       You got {{ store.getScorePercentage() }} of the questions correct
     </p>
     <nav
@@ -44,7 +44,7 @@ if (localStorageData !== null) {
     >
       <RouterLink
         to="/"
-        class="font-primary font-extrabold text-xl flex justify-center items-center py-3"
+        class="font-primary font-extrabold text-lg md:text-xl flex justify-center items-center py-3"
         @click="resetQuizData"
         ><span class="material-symbols-outlined pe-2"> refresh </span> Retake Quiz</RouterLink
       >
