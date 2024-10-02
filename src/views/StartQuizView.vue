@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 interface questionsRawData {
   question: string
   topics: string[]
+  choices: string[]
 }
 const props = defineProps<{
   questionsList: questionsRawData[]

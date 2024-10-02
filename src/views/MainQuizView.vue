@@ -5,6 +5,7 @@ import { useQuizStore } from '@/stores/useQuizStore'
 interface questionsRawData {
   question: string
   topics: string[]
+  choices: string[]
 }
 
 const props = defineProps<{
