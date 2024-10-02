@@ -61,29 +61,27 @@ window.onbeforeunload = () => {
   }
 }
 
-const choicesClasses = computed((selectedChoice) => {
-  return (selectedChoice: number) => {
-    const renderedChoice = props.questionsList[currentQuestion.value].choices[selectedChoice]
-    const pickedChoice = currentSelection.value
-    const correctChoice = props.answersList[currentQuestion.value]
-    const questionAssessment = store.scoreTracker[currentQuestion.value]
+const choicesClasses = (selectedChoice: number) => {
+  const renderedChoice = props.questionsList[currentQuestion.value].choices[selectedChoice]
+  const pickedChoice = currentSelection.value
+  const correctChoice = props.answersList[currentQuestion.value]
+  const questionAssessment = store.scoreTracker[currentQuestion.value]
 
-    const isQuestionAnswered = questionAssessment !== null
-    const isChoiceSelected = renderedChoice === pickedChoice
-    const isChoiceTheCorrectAnswer = renderedChoice === correctChoice
+  const isQuestionAnswered = questionAssessment !== null
+  const isChoiceSelected = renderedChoice === pickedChoice
+  const isChoiceTheCorrectAnswer = renderedChoice === correctChoice
 
-    return {
-      'text-stone-50': isQuestionAnswered || !isChoiceSelected,
-      'bg-lime-600 border-lime-600':
-        isQuestionAnswered && (questionAssessment || isChoiceTheCorrectAnswer),
-      'bg-rose-600 borrder-rose-600': isQuestionAnswered && isChoiceSelected && !questionAssessment,
-      'border-transparent': !isChoiceSelected && (!isChoiceTheCorrectAnswer || !isQuestionAnswered),
-      'bg-stone-800': isQuestionAnswered && !isChoiceSelected && !isChoiceTheCorrectAnswer,
-      'bg-stone-700 hover:bg-stone-500': !isQuestionAnswered && !isChoiceSelected,
-      'bg-amber-600 border-amber-100 text-stone-900': !isQuestionAnswered && isChoiceSelected
-    } as Record<string, boolean>
-  }
-})
+  return {
+    'text-stone-50': isQuestionAnswered || !isChoiceSelected,
+    'bg-lime-600 border-lime-600':
+      isQuestionAnswered && (questionAssessment || isChoiceTheCorrectAnswer),
+    'bg-rose-600 borrder-rose-600': isQuestionAnswered && isChoiceSelected && !questionAssessment,
+    'border-transparent': !isChoiceSelected && (!isChoiceTheCorrectAnswer || !isQuestionAnswered),
+    'bg-stone-800': isQuestionAnswered && !isChoiceSelected && !isChoiceTheCorrectAnswer,
+    'bg-stone-700 hover:bg-stone-500': !isQuestionAnswered && !isChoiceSelected,
+    'bg-amber-600 border-amber-100 text-stone-900': !isQuestionAnswered && isChoiceSelected
+  } as Record<string, boolean>
+}
 </script>
 
 <template>
@@ -172,7 +170,7 @@ const choicesClasses = computed((selectedChoice) => {
           </button>
           <nav
             v-else-if="store.getAnswered() === props.questionsList.length"
-            class="absolute bg-stone-600 hover:bg-amber-500 hover:text-black flex flex-col rounded-sm transition-all ease-in-out duration-150 text-center md:w-1/3 w-1/2"
+            class="absolute bg-stone-600 hover:bg-amber-500 text-stone-50 hover:text-black flex flex-col rounded-sm transition-all ease-in-out duration-150 text-center md:w-1/3 w-1/2"
             :class="store.getAnswered() === props.questionsList.length ? '' : 'hidden'"
           >
             <RouterLink

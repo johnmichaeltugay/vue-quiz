@@ -34,8 +34,8 @@ if (localStorageData !== null) {
   <div
     class="select-none text-stone-50 text-center font-primary w-full flex flex-col justify-center align-center"
   >
-    <h3 class="text-lg md:text-2xl font-extrabold">Your Score</h3>
-    <p class="text-6xl md:text-8xl font-thin mt-4 mb-2">{{ store.getScore() }}</p>
+    <h3 class="text-2xl md:text-4xl font-extrabold uppercase mt-20">Your Score</h3>
+    <p class="text-7xl md:text-9xl font-thin mt-4 mb-2">{{ store.getScore() }}</p>
     <p class="text-sm md:text-md font-medium">
       You got {{ store.getScorePercentage() }} of the questions correct
     </p>

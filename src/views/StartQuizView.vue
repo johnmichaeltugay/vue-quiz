@@ -39,7 +39,7 @@ if (localStorageData !== null) {
 
 <template>
   <div
-    class="flex flex-col justify-center items-center border-stone-50 border-4 rounded-md p-6 md:p-12"
+    class="flex flex-col justify-self-center justify-center items-center border-stone-50 border-4 rounded-3xl p-6 md:p-12"
   >
     <header>
       <p
@@ -47,15 +47,15 @@ if (localStorageData !== null) {
         class="font-primary font-semibold text-center text-md md:text-lg text-stone-50"
       >
         Answer the {{ questionsList.length }} question{{ questionsList.length > 1 ? 's' : '' }} by
-        choosing from the provided choices. Question topics include: {{ topicsList }}.
+        choosing from the provided choices. Question topics include: <br /><br />{{ topicsList }}.
       </p>
     </header>
     <nav
-      class="bg-stone-600 hover:bg-amber-500 hover:text-black flex flex-col rounded transition-all ease-in-out duration-150 text-center md:w-1/3 w-1/2 mt-20"
+      class="bg-stone-600 hover:bg-amber-500 text-stone-50 hover:text-black flex flex-col rounded transition-all ease-in-out duration-150 text-center md:w-1/3 w-1/2 mt-20"
     >
       <RouterLink
         to="/quiz"
-        class="font-primary font-extrabold text-lg md:text-xl items-stretch py-3"
+        class="font-primary font-extrabold text-lg uppercase md:text-xl items-stretch py-3"
         >Start</RouterLink
       >
     </nav>

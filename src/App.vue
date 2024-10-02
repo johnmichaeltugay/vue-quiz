@@ -3,7 +3,7 @@ import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <p class="text-4xl md:text-5xl text-center font-primary font-thin py-8">Trivia Quiz</p>
+  <p class="text-6xl md:text-7xl text-center font-primary font-thin uppercase py-8">Trivia Quiz</p>
   <Transition name="swipe-left">
     <RouterView />
   </Transition>
