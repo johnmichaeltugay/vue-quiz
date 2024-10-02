@@ -3,19 +3,8 @@ import questionsData from '@/data/questionsRoster.json'
 import answersData from '@/data/answersRoster.json'
 
 const questions = questionsData.questions
-const choices = questionsData.choices
 const answers = answersData.answers
-const localStorageID = 'quizTracker'
-
-const countCheck =
-  questions.length > choices.length
-    ? 'choices'
-    : questions.length < choices.length || questions.length < answers.length
-      ? 'questions'
-      : questions.length > answers.length
-        ? 'answers'
-        : 'clear'
-countCheck !== 'clear' ? console.log('missing ' + countCheck + ' found') : ''
+const localStorageID = 'RuKIrzAQcTe'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,7 +13,8 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: () => import('@/views/StartQuizView.vue'),
-      props: { questionsList: questions }
+      props: { questionsList: questions, quizCache: localStorageID },
+      meta: { transition: 'slide-right' }
     },
     {
       path: '/quiz',
@@ -32,16 +22,17 @@ const router = createRouter({
       component: () => import('@/views/MainQuizView.vue'),
       props: {
         questionsList: questions,
-        choicesList: choices,
         answersList: answers,
         quizCache: localStorageID
-      }
+      },
+      meta: { transition: 'slide-right' }
     },
     {
       path: '/results',
       name: 'results',
       component: () => import('@/views/ResultsView.vue'),
-      props: { questionsList: questions, quizCache: localStorageID }
+      props: { questionsList: questions, quizCache: localStorageID },
+      meta: { transition: 'slide-right' }
     }
   ]
 })
